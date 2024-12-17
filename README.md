@@ -6,6 +6,15 @@ En tant que développeur backend dans une entreprise de location de films, nous 
 ### Objectif
     
 Afin de rappeler aux clients la date d'échéance de leur location et d'éviter les retards, nous souhaitons mettre en place un système de tâches planifiées qui enverrait des notifications par email à J-5 (à 12h) et J-3 (à 12h) avant la date de retour pour chaque location. Implémentez un service de planification qui utilise les fuseaux horaires des clients pour envoyer des notifications aux moments appropriés.
+
+### Importer la base de données Sakila
+
+1. Placez les scripts SQL dans le dossier `postgres-sakila-db`.
+2. Importez la base de données Sakila avec la commande suivante :
+
+   ```bash
+   psql -U postgres -d sakila -f postgres-sakila-db/postgres-sakila-schema.sql
+   psql -U postgres -d sakila -f postgres-sakila-db/postgres-sakila-insert-data.sql
     
     
 ### Pré-requis fonctionnels

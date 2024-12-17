@@ -1,0 +1,6 @@
+# Ignorer les fichiers de base de données
+postgres-sakila-db/
+*.sql
+*.db
+*.sqlite
+pgdata/
