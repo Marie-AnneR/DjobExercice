@@ -1,3 +1,0 @@
-[submodule "rental-notification-service"]
-	path = rental-notification-service
-	url = ./rental-notification-service/
