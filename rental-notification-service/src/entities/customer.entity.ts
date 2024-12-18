@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Rental } from './rental.entity';
-
+//représente mon tableau client
+//définition de mes colonnes + interaction avec le tableau rental
 @Entity('customer')
 export class Customer {
   @PrimaryGeneratedColumn()

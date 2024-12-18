@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { RentalService } from '../rental/rental.service';
-
+//gestion de l'envoi de notifications
+//planification des tâches avec Cron
 @Injectable()
 export class NotificationService {
   private readonly logger = new Logger(NotificationService.name);

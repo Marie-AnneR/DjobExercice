@@ -1,45 +1,117 @@
-# DjobExercice
-## Exercice à faire
-### Contexte
-En tant que développeur backend dans une entreprise de location de films, nous voulons améliorer la gestion des retours en rappelant aux clients la date d'échéance de leur location.
-    
-### Objectif
-    
-Afin de rappeler aux clients la date d'échéance de leur location et d'éviter les retards, nous souhaitons mettre en place un système de tâches planifiées qui enverrait des notifications par email à J-5 (à 12h) et J-3 (à 12h) avant la date de retour pour chaque location. Implémentez un service de planification qui utilise les fuseaux horaires des clients pour envoyer des notifications aux moments appropriés.
+# 🚀 Rental Notification Service
 
-### Importer la base de données Sakila
+**Rental Notification Service** est une application complète (back-end et front-end) permettant de gérer des locations proches de leur date d'échéance et d'envoyer des notifications automatisées ou manuelles aux clients.
 
-1. Placez les scripts SQL dans le dossier `postgres-sakila-db`.
-2. Importez la base de données Sakila avec la commande suivante :
+Ce projet utilise **NestJS** pour le back-end, **React** avec **TailwindCSS** pour le front-end, et **PostgreSQL** pour la base de données.
 
-   ```bash
-   psql -U postgres -d sakila -f postgres-sakila-db/postgres-sakila-schema.sql
-   psql -U postgres -d sakila -f postgres-sakila-db/postgres-sakila-insert-data.sql
-    
-    
-### Pré-requis fonctionnels
-    
-1. Un client (Customer) a la possibilité d'effectuer des locations (Rental) de films.
-2. Chaque location est représentée par une date de début et une date de retour, qui peuvent être choisies par le client.
-3. La durée d'une location est d'au minimum 1 semaine et ne doit pas excéder 3 semaines.
-4. Les dates de début et de retour des locations sont définies en fonction du fuseau horaire (timezone) du client (les tables doivent être modifiées en conséquence).
-5. Une location en cours n'est pas modifiable.
-    
-    
-### Pré-requis techniques
-    
-1. Installer la base de données "Sakila" en version PostgreSQL disponible sur ce lien : https://github.com/jOOQ/sakila/tree/main/postgres-sakila-db (installer schéma + données).
-2. Initialiser un projet NestJS avec les entités Customer, Film et Rental (en utilisant TypeORM ou Prisma).
-3. Deux tâches planifiées doivent être mises en place :
-    - Une tâche planifiée qui envoie un email à J-5 à 12h00 avant la date de retour de chaque location.
-    - Une tâche planifiée qui envoie un email à J-3 à 12h00 avant la date de retour de chaque location.
-4. Créer une API permettant de :
-    - Ajouter/Modifier un client.
-    - Effectuer une location.
-    - Lister toutes les tâches planifiées.
-    - Lancer une tâche planifiée manuellement.
-    - Vérifier l'état d'exécution d'une tâche planifiée.
-5. Tips :
-    - La modification du schéma actuel de "Sakila" est autorisée.
-    - Utiliser le package `@nestjs/schedule` pour gérer les tâches planifiées.
-    - Le service de mail peut être simulé par une simple log
+---
+
+## **🧩 Fonctionnalités**
+
+- **Back-end (NestJS)** :
+  - Récupération des locations proches de l’échéance (**GET `/rentals/due`**).
+  - Envoi manuel des notifications aux clients (**POST `/notifications/send`**).
+  - Notifications automatiques planifiées grâce à une tâche **Cron**.
+- **Front-end (React)** :
+  - Affichage des locations proches de l’échéance dans un tableau interactif.
+  - Rafraîchissement des données via un bouton.
+  - Envoi manuel des notifications via un bouton.
+- **Base de données (PostgreSQL)** :
+  - Tables **`customer`** et **`rental`** avec des relations.
+  - Script SQL pour insérer des données de test.
+
+---
+
+## **🛠️ Technologies utilisées**
+
+### **Back-end :**
+- [NestJS](https://nestjs.com/) - Framework Node.js pour le back-end.
+- [TypeORM](https://typeorm.io/) - ORM pour PostgreSQL.
+- [PostgreSQL](https://www.postgresql.org/) - Base de données relationnelle.
+
+### **Front-end :**
+- [React](https://reactjs.org/) - Bibliothèque front-end pour l'interface utilisateur.
+- [TailwindCSS](https://tailwindcss.com/) - Framework CSS utilitaire pour le design.
+- [Axios](https://axios-http.com/) - Pour les requêtes HTTP.
+
+---
+
+## 🛠️ Installation
+1. Prérequis
+Assurez-vous d'avoir installé les outils suivants :
+- Node.js (v18+ recommandé)
+- PostgreSQL
+- npm ou Yarn
+
+2. Configuration de la base de données
+- Créez la base de données sakila dans PostgreSQL :
+    ```bash
+    CREATE DATABASE sakila;
+- Importez le schéma et les données de test : Depuis le répertoire postgres-sakila-db du projet, exécutez :
+    ```bash
+    psql -U postgres -d sakila -f ./postgres-sakila-db/postgres-sakila-schema.sql
+    psql -U postgres -d sakila -f ./postgres-sakila-db/postgres-sakila-insert-data.sql
+3. Installation du Back-end
+- Accédez au dossier backend :
+    ```bash
+    cd backend
+- Installez les dépendances :
+    ```bash
+    npm install
+- Démarrez le serveur :
+    ```bash
+    npm run start
+Le back-end sera accessible à l'adresse :
+📍 http://localhost:3000
+
+4. Installation du Front-end
+- Accédez au dossier frontend :
+
+    ```bash
+    cd frontend
+- Installez les dépendances :
+
+    ```bash
+    npm install
+- Lancez le serveur de développement :
+
+    ```bash
+    npm run dev
+Le front-end sera accessible à l'adresse :
+📍 http://localhost:5173
+
+## 🚀 Utilisation
+### Back-end :
+Récupérer les locations proches de l’échéance :
+Méthode : GET
+Endpoint : http://localhost:3000/rentals/due
+Envoyer les notifications manuellement :
+Méthode : POST
+Endpoint : http://localhost:3000/notifications/send
+
+### Front-end :
+- Accédez au front-end via http://localhost:5173.
+- Rafraîchir les locations : Cliquez sur le bouton "Rafraîchir les Locations".
+- Envoyer les notifications : Cliquez sur le bouton "Envoyer les Notifications" pour déclencher l’envoi.
+## ✅ Tests
+- Tester les routes API avec curl
+
+1. Récupérer les locations proches de l’échéance :
+    ```bash
+    curl http://localhost:3000/rentals/due
+2. Envoyer manuellement les notifications :
+    ```bash
+    curl -X POST http://localhost:3000/notifications/send
+## 🎨 Résultat attendu
+Sur le Front-end :
+Un tableau s’affiche avec les informations suivantes :
+
+ID Location
+Date de Retour
+Client (Prénom + Nom)
+Email
+Fuseau Horaire
+Deux boutons sont disponibles :
+
+Rafraîchir les Locations : Met à jour les données du tableau.
+Envoyer les Notifications : Simule l’envoi des notifications aux clients.

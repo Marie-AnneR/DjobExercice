@@ -7,6 +7,10 @@ import { RentalController } from './rental/rental.controller';
 import { RentalService } from './rental/rental.service';
 import { NotificationService } from './notification/notification.service';
 import { NotificationController } from './notification/notification.controller';
+//le hub de mon projet
+//configure TypeORM pour la BDD
+//enregistre entities controls et services
+//active le module ScheduleModule
 
 @Module({
   imports: [

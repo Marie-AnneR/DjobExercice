@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, MoreThanOrEqual, LessThanOrEqual } from 'typeorm';
 import { Rental } from '../entities/rental.entity';
-
+//service pour gérer les locations
+//méthode pour récupérer les locations à j-3 et j-5
 @Injectable()
 export class RentalService {
   constructor(
