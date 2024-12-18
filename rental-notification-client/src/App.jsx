@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function App() {
-  const [rentals, setRentals] = useState([]); 
-  const [loading, setLoading] = useState(false); 
+  const [rentals, setRentals] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchRentals = async () => {
     try {
@@ -32,49 +32,68 @@ function App() {
   }, []);
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', margin: '2rem' }}>
-      <h1>Locations proches de l'échéance</h1>
-      <button onClick={fetchRentals} style={{ marginBottom: '1rem' }}>
-        Rafraîchir les Locations
-      </button>
-      <button onClick={sendNotifications} disabled={loading} style={{ marginLeft: '1rem' }}>
-        {loading ? 'Envoi en cours...' : 'Envoyer les Notifications'}
-      </button>
-
-      <table border="1" cellPadding="10" style={{ width: '100%', marginTop: '2rem' }}>
-        <thead>
-          <tr>
-            <th>ID Location</th>
-            <th>Date de Retour</th>
-            <th>Client</th>
-            <th>Email</th>
-            <th>Fuseau Horaire</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rentals.length > 0 ? (
-            rentals.map((rental) => {
-              console.log('Donnée du tableau :', rental); // Vérifiez ici
-              return (
-                <tr key={rental.rental_id}>
-                  <td>{rental.rental_id}</td>
-                  <td>{new Date(rental.return_date).toLocaleString()}</td>
-                  <td>{`${rental.customer.first_name} ${rental.customer.last_name}`}</td>
-                  <td>{rental.customer.email}</td>
-                  <td>{rental.customer.timezone || 'UTC'}</td>
-                </tr>
-              );
-            })
-          ) : (
+    <div className="min-h-screen bg-gray-100 p-8 font-sans">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
+        Locations proches de l'échéance
+      </h1>
+      <div className="flex justify-center space-x-4 mb-6">
+        <button
+          onClick={fetchRentals}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >
+          Rafraîchir les Locations
+        </button>
+        <button
+          onClick={sendNotifications}
+          disabled={loading}
+          className={`px-4 py-2 rounded text-white ${
+            loading ? 'bg-gray-400' : 'bg-green-500 hover:bg-green-700 transition'
+          }`}
+        >
+          {loading ? 'Envoi en cours...' : 'Envoyer les Notifications'}
+        </button>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full bg-white rounded-lg shadow-md">
+          <thead className="bg-gray-800 text-white">
             <tr>
-              <td colSpan="5" style={{ textAlign: 'center' }}>
-                Aucune location proche de l'échéance.
-              </td>
+              <th className="py-2 px-4">ID Location</th>
+              <th className="py-2 px-4">Date de Retour</th>
+              <th className="py-2 px-4">Client</th>
+              <th className="py-2 px-4">Email</th>
+              <th className="py-2 px-4">Fuseau Horaire</th>
             </tr>
-          )}
-        </tbody>
-
-      </table>
+          </thead>
+          <tbody>
+            {rentals.length > 0 ? (
+              rentals.map((rental) => (
+                <tr
+                  key={rental.rental_id}
+                  className="odd:bg-gray-50 even:bg-white hover:bg-blue-100"
+                >
+                  <td className="py-2 px-4 text-center">{rental.rental_id}</td>
+                  <td className="py-2 px-4 text-center">
+                    {new Date(rental.return_date).toLocaleString()}
+                  </td>
+                  <td className="py-2 px-4 text-center">
+                    {rental.customer.first_name} {rental.customer.last_name}
+                  </td>
+                  <td className="py-2 px-4 text-center">{rental.customer.email}</td>
+                  <td className="py-2 px-4 text-center">
+                    {rental.customer.timezone || 'UTC'}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="py-4 px-4 text-center text-gray-500">
+                  Aucune location proche de l'échéance.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
