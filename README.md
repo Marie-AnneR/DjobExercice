@@ -54,7 +54,7 @@ Assurez-vous d'avoir installé les outils suivants :
 3. Installation du Back-end
 - Accédez au dossier backend :
     ```bash
-    cd backend
+    cd rental-notification-service
 - Installez les dépendances :
     ```bash
     npm install
@@ -68,7 +68,7 @@ Le back-end sera accessible à l'adresse :
 - Accédez au dossier frontend :
 
     ```bash
-    cd frontend
+    cd rental-notification-client
 - Installez les dépendances :
 
     ```bash
