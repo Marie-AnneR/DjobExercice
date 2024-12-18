@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, MoreThanOrEqual, LessThanOrEqual } from 'typeorm';
-import { Rental } from '../rental/rental.entity';
+import { Rental } from '../entities/rental.entity';
 
 @Injectable()
 export class RentalService {
