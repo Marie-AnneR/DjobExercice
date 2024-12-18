@@ -1,6 +1,6 @@
 import { Controller, Post } from '@nestjs/common';
 import { NotificationService } from './notification.service';
-
+//permet de déclencher les notifs manuellement
 @Controller('notifications') // Définit la route parent comme "/notifications"
 export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
